@@ -1,1 +1,1 @@
-angular.module('eventNow', ['angular-meteor', 'ui.router', 'accounts.ui']);
+angular.module('eventNow', ['angular-meteor', 'ui.router', 'accounts.ui', 'angularUtils.directives.dirPagination']);

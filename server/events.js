@@ -1,5 +1,5 @@
-Meteor.publish("events", function () {
-    return Events.find({
+Meteor.publish("events", function (options) {
+    let selector = {
         $or: [
             {
                 $and: [
@@ -14,5 +14,7 @@ Meteor.publish("events", function () {
                 ]
             }
         ]
-    });
+    };
+    Counts.publish(this, 'numberOfEvents', Events.find(selector), {noReady: true});
+    return Events.find(selector, options);
 });

@@ -9,9 +9,10 @@
 </form>
 
 <ul>
-    <li ui-sref="eventDetails({ eventId: event._id })" ng-repeat="event in eventsList.events">
+    <li ui-sref="eventDetails({ eventId: event._id })" dir-paginate="event in eventsList.events | itemsPerPage: eventsList.perPage" total-items="eventsList.eventsCount">
         {{event.name}}
         <p>{{event.description}}</p>
         <button ng-click="eventsList.removeEvent(event)">X</button>
     </li>
 </ul>
+<dir-pagination-controls on-page-change="eventsList.pageChanged(newPageNumber)"></dir-pagination-controls>
