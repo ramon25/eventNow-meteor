@@ -1,0 +1,1 @@
+angular.module('eventNow', ['angular-meteor', 'ui.router', 'accounts.ui']);

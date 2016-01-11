@@ -1,0 +1,17 @@
+<form>
+    <label>Event Name: </label>
+    <input type="text" ng-model="eventsList.newEvent.name" />
+    <label>Description: </label>
+    <input type="text" ng-model="eventsList.newEvent.description" />
+    <label>Public Event?</label>
+    <input type="checkbox" ng-model="eventsList.newEvent.public" />
+    <button ng-click="eventsList.addEvent()">Add Event!</button>
+</form>
+
+<ul>
+    <li ui-sref="eventDetails({ eventId: event._id })" ng-repeat="event in eventsList.events">
+        {{event.name}}
+        <p>{{event.description}}</p>
+        <button ng-click="eventsList.removeEvent(event)">X</button>
+    </li>
+</ul>
