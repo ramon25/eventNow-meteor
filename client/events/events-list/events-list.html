@@ -20,6 +20,7 @@
         {{event.name}}
         <p>{{event.description}}</p>
         <button ng-click="eventsList.removeEvent(event)">X</button>
+        <p><small>Posted by {{ eventsList.getEventCreator(event) | displayName }}</small></p>
     </li>
 </ul>
 <dir-pagination-controls on-page-change="eventsList.pageChanged(newPageNumber)"></dir-pagination-controls>

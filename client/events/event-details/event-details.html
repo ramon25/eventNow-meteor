@@ -8,7 +8,7 @@ The event you selected is:
 <button ui-sref="events">Back</button>
 <ul>
     Users:
-    <li ng-repeat="user in eventDetails.users">
-        <div>{{ user.emails[0].address }}</div>
+    <li ng-repeat="user in eventDetails.users | uninvited:eventDetails.event">
+        <div>{{ user | displayName }}</div>
     </li>
 </ul>

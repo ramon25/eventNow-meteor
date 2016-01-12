@@ -16,6 +16,7 @@ angular.module('eventNow').directive('eventsList', function () {
             this.orderProperty = '1';
             this.searchText = '';
 
+            this.subscribe('users');
             this.subscribe('events', () => {
                 return [
                     {
@@ -54,6 +55,24 @@ angular.module('eventNow').directive('eventsList', function () {
 
             this.pageChanged = (newPage) => {
                 this.page = newPage;
+            };
+
+            this.getEventCreator = function(event){
+                if (!event) {
+                    return '';
+                }
+
+                let owner = Meteor.users.findOne(event.owner);
+
+                if (!owner) {
+                    return 'nobody';
+                }
+
+                if (Meteor.userId() !== null && owner._id === Meteor.userId()) {
+                    return 'me';
+                }
+
+                return owner;
             };
         }
     }
