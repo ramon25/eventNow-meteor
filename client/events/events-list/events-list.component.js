@@ -7,11 +7,14 @@ angular.module('eventNow').directive('eventsList', function () {
             $reactive(this).attach($scope);
 
             this.newEvent = {};
+
             this.perPage = 3;
             this.page = 1;
             this.sort = {
                 name: 1
             };
+            this.orderProperty = '1';
+            this.searchText = '';
 
             this.subscribe('events', () => {
                 return [
@@ -19,7 +22,8 @@ angular.module('eventNow').directive('eventsList', function () {
                         limit: parseInt(this.perPage),
                         skip: parseInt((this.getReactively('page') - 1) * this.perPage),
                         sort: this.getReactively('sort')
-                    }
+                    },
+                    this.getReactively('searchText')
                 ]
             });
 
@@ -31,6 +35,12 @@ angular.module('eventNow').directive('eventsList', function () {
                     return Counts.get('numberOfEvents');
                 }
             });
+
+            this.updateSort = () => {
+                this.sort = {
+                    name: parseInt(this.orderProperty)
+                }
+            };
 
             this.addEvent = () => {
                 this.newEvent.owner = Meteor.user()._id;

@@ -7,7 +7,14 @@
     <input type="checkbox" ng-model="eventsList.newEvent.public" />
     <button ng-click="eventsList.addEvent()">Add Event!</button>
 </form>
-
+<h1>Events:</h1>
+<div>
+    <input type="search" ng-model="eventsList.searchText" placeholder="Search" />
+    <select ng-model="eventsList.orderProperty" ng-change="eventsList.updateSort()">
+        <option value="1">Ascending</option>
+        <option value="-1">Descending</option>
+    </select>
+</div>
 <ul>
     <li ui-sref="eventDetails({ eventId: event._id })" dir-paginate="event in eventsList.events | itemsPerPage: eventsList.perPage" total-items="eventsList.eventsCount">
         {{event.name}}
