@@ -10,5 +10,6 @@ The event you selected is:
     Users:
     <li ng-repeat="user in eventDetails.users | uninvited:eventDetails.event">
         <div>{{ user | displayName }}</div>
+        <button ng-click="eventDetails.invite(user)">Invite</button>
     </li>
 </ul>

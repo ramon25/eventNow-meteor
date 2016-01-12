@@ -27,6 +27,17 @@ angular.module('eventNow').directive('eventDetails', function () {
                     }
                 });
             };
+
+            this.invite = (user) => {
+                Meteor.call('invite', this.event._id, user._id, (error) => {
+                    if (error) {
+                        console.log('Oops, unable to invite!');
+                    }
+                    else {
+                        console.log('Invited!');
+                    }
+                });
+            };
         }
     }
 });
