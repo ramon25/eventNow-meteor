@@ -49,9 +49,9 @@ Meteor.methods({
                     from: "noreply@eventnow.ch",
                     to: to,
                     replyTo: from || undefined,
-                    subject: "Event: " + event.title,
+                    subject: "Event: " + event.name,
                     text:
-                    "Hey, I just invited you to '" + event.title + "' on eventNow." +
+                    "Hey, I just invited you to '" + event.name + "' on eventNow." +
                     "\n\nCome check it out: " + Meteor.absoluteUrl() + "\n"
                 });
             }
