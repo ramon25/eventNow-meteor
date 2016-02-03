@@ -84,26 +84,10 @@ angular.module('eventNow').directive('eventsList', function () {
                 return owner;
             };
 
-            this.rsvp = (eventId, rsvp) => {
-                Meteor.call('rsvp', eventId, rsvp, (error) => {
-                    if (error) {
-                        console.log('Oops, unable to rsvp!');
-                    }
-                    else {
-                        console.log('RSVP Done!');
-                    }
-                });
-            };
-
             this.getUserById = (userId) => {
                 return Meteor.users.findOne(userId);
             };
 
-            this.outstandingInvitations = (event) => {
-                return _.filter(this.users, (user) => {
-                    return (_.contains(event.invited, user._id) && !_.findWhere(event.rsvps, {user: user._id}));
-                });
-            };
         }
     }
 });

@@ -1,24 +1,21 @@
-angular.module('eventNow').directive('eventDetails', function () {
+angular.module('eventNow').directive('ticketDetails', function () {
     return {
         restrict: 'E',
-        templateUrl: 'client/events/event-details/event-details.html',
-        controllerAs: 'eventDetails',
+        templateUrl: 'client/tickets/ticket-details/ticket-details.html',
+        controllerAs: 'ticketDetails',
         controller: function ($scope, $stateParams, $reactive) {
             $reactive(this).attach($scope);
 
-            this.newTicket = {};
-
-            this.subscribe('events');
-            this.subscribe('tickets', () => { return [{event: $stateParams.eventId}]});
+            this.subscribe('tickets');
             //this.subscribe('users');
 
             this.helpers({
                 event: () => {
                     return Events.findOne({ _id: $stateParams.eventId });
                 },
-                tickets: () => {
-                    return Tickets.find({});
-                },
+                //users: () => {
+                //    return Meteor.users.find({});
+                //},
                 isLoggedIn: () => {
                     return Meteor.userId() !== null;
                 }
@@ -32,12 +29,6 @@ angular.module('eventNow').directive('eventDetails', function () {
                         public: this.event.public
                     }
                 });
-            };
-
-            this.addTicket = () => {
-                this.newTicket.event = $stateParams.eventId;
-                Tickets.insert(this.newTicket);
-                this.newTicket = {};
             };
         }
     }

@@ -4,26 +4,13 @@ Meteor.publish("events", function (options, searchString) {
     }
 
     let selector = {
-        name: { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
         $or: [
-            {
-                $and: [
-                    {"public": true},
-                    {"public": {$exists: true}}
-                ]
-            },
-            {
-                $and: [
-                    {owner: this.userId},
-                    {owner: {$exists: true}}
-                ]
-            },
-            {
-                $and: [
-                    {invited: this.userId},
-                    {invited: {$exists: true}}
-                ]
-            }
+            {name: { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' }},
+            {description: { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' }}
+        ],
+        $and: [
+            {owner: this.userId},
+            {owner: {$exists: true}}
         ]
     };
     Counts.publish(this, 'numberOfEvents', Events.find(selector), {noReady: true});
