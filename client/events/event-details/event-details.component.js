@@ -15,6 +15,9 @@ angular.module('eventNow').directive('eventDetails', function () {
                 },
                 users: () => {
                     return Meteor.users.find({});
+                },
+                isLoggedIn: () => {
+                    return Meteor.userId() !== null;
                 }
             });
 
@@ -37,6 +40,13 @@ angular.module('eventNow').directive('eventDetails', function () {
                         console.log('Invited!');
                     }
                 });
+            };
+
+            this.canInvite = () => {
+                if (!this.event)
+                    return false;
+
+                return !this.event.public && this.event.owner === Meteor.userId();
             };
         }
     }

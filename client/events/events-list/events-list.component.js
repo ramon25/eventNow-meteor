@@ -37,6 +37,12 @@ angular.module('eventNow').directive('eventsList', function () {
                 },
                 eventsCount: () => {
                     return Counts.get('numberOfEvents');
+                },
+                isLoggedIn: () => {
+                    return Meteor.userId() !== null;
+                },
+                currentUserId: () => {
+                    return Meteor.userId();
                 }
             });
 
