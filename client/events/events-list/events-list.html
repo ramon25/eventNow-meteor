@@ -1,30 +1,51 @@
-<form ng-show="eventsList.isLoggedIn">
-    <label>Event Name: </label>
-    <input type="text" ng-model="eventsList.newEvent.name" />
-    <label>Description: </label>
-    <input type="text" ng-model="eventsList.newEvent.description" />
-    <label>Public Event?</label>
-    <input type="checkbox" ng-model="eventsList.newEvent.public" />
-    <button ng-click="eventsList.addEvent()">Add Event!</button>
-</form>
-<div ng-hide="eventsList.isLoggedIn">
-    Log in to create an event!
-</div>
-<h1>Events:</h1>
-<div>
-    <input type="search" ng-model="eventsList.searchText" placeholder="Search" />
-    <select ng-model="eventsList.orderProperty" ng-change="eventsList.updateSort()">
-        <option value="1">Ascending</option>
-        <option value="-1">Descending</option>
-    </select>
-</div>
-<ul>
-    <li ui-sref="eventDetails({ eventId: event._id })" dir-paginate="event in eventsList.events | itemsPerPage: eventsList.perPage" total-items="eventsList.eventsCount">
-        {{event.name}}
-        <p>{{event.description}}</p>
-        <button ng-click="eventsList.removeEvent(event)" ng-show="eventsList.isLoggedIn && event.owner == eventsList.currentUserId">X</button>
+<md-content flex layout="row">
+    <div layout="row" flex layout-align="center">
+        <div flex="50" flex-xs="100">
+            <h1 class="md-title">Events</h1>
+            <div>
+                <input type="search" ng-model="eventsList.searchText" placeholder="Search"/>
+                <select ng-model="eventsList.orderProperty" ng-change="eventsList.updateSort()">
+                    <option value="1">Ascending</option>
+                    <option value="-1">Descending</option>
+                </select>
+            </div>
+            <ul>
+                <li ui-sref="eventDetails({ eventId: event._id })"
+                    dir-paginate="event in eventsList.events | itemsPerPage: eventsList.perPage"
+                    total-items="eventsList.eventsCount">
+                    {{event.name}}
+                    <p>{{event.description}}</p>
+                    <button ng-click="eventsList.removeEvent(event)"
+                            ng-show="eventsList.isLoggedIn && event.owner == eventsList.currentUserId">X
+                    </button>
 
-        <p><small>Created by {{ eventsList.getEventCreator(event) | displayName }}</small></p>
-    </li>
-</ul>
-<dir-pagination-controls on-page-change="eventsList.pageChanged(newPageNumber)"></dir-pagination-controls>
+                    <p>
+                        <small>Created by {{ eventsList.getEventCreator(event) | displayName }}</small>
+                    </p>
+                </li>
+            </ul>
+            <dir-pagination-controls on-page-change="eventsList.pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+        <div flex="30" flex-xs="100" >
+            <h1 class="md-title">New Event</h1>
+            <form layout="column" ng-show="eventsList.isLoggedIn">
+                <md-input-container>
+                    <label>Event Name</label>
+                    <input type="text" ng-model="eventsList.newEvent.name">
+                </md-input-container>
+                <md-input-container>
+                <label>Description: </label>
+                <input type="text" ng-model="eventsList.newEvent.description"/>
+                </md-input-container>
+                <md-checkbox ng-model="eventsList.newEvent.public" aria-label="Public Event?">
+                    Public Event?
+                </md-checkbox>
+                <md-button class="md-raised md-primary" ng-click="eventsList.addEvent()">Add Event!</md-button>
+            </form>
+            <div ng-hide="eventsList.isLoggedIn">
+                Log in to create an event!
+            </div>
+
+        </div>
+    </div>
+</md-content>

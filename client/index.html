@@ -2,15 +2,18 @@
     <base href="/">
     <title>eventNow</title>
 </head>
-<body>
 
-<div ng-app="eventNow" ng-strict-di="">
-    <login-buttons></login-buttons>
-    <h1>
-        <a href="/events">Home</a>
-    </h1>
-
-    <div ui-view=""></div>
+<body layout="column">
+<div ng-app="eventNow">
+<md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
+    <h2>
+        <a ui-sref="/"><span class="md-title">eventNow</span></a>
+    </h2>
+    <span flex></span>
+    <div class="navbar-right navbar-text">
+        <login-buttons></login-buttons>
+    </div>
+</md-toolbar>
+<div ui-view></div>
 </div>
-
 </body>
